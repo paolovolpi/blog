@@ -250,7 +250,7 @@ public:
   // set max size of queue
   void set_maxsize(std::size_t maxsize){
     ipc::scoped_lock<ipc::named_mutex>lock(*ipcmtx_);
-    return maxsize_;
+    maxsize_ = maxsize;
   }
   // check if queue is empty
   bool empty()const{
