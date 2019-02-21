@@ -25,26 +25,26 @@ public:
   // async deq operation
   template <typename Handler>
   void async_deq(Handler handler) {
-    this->service.async_deq(this->implementation,q_,handler);
+    this->get_service().async_deq(this->get_implementation(),q_,handler);
   }
   // async deq operation - timed
   template <typename Handler>
   void timed_async_deq(Handler handler,std::size_t ms) {
-    this->service.timed_async_deq(this->implementation,q_,handler,ms);
+    this->get_service().timed_async_deq(this->get_implementation(),q_,handler,ms);
   }
   // wait until we can deq a message from queue in async mode
   template <typename Handler>
   void async_wait_deq(Handler handler) {
-    this->service.async_wait_deq(this->implementation,q_,handler);
+    this->get_service().async_wait_deq(this->get_implementation(),q_,handler);
   }
   // wait until we can deq a message from queue in async mode - timed
   template <typename Handler>
   void timed_async_wait_deq(Handler handler,std::size_t ms) {
-    this->service.timed_async_wait_deq(this->implementation,q_,handler,ms);
+    this->get_service().timed_async_wait_deq(this->get_implementation(),q_,handler,ms);
   }
   // sync deq operation (blocking)
   std::pair<bool,typename Queue::value_type>sync_deq(boost::system::error_code&ec){
-    return this->service.sync_deq(this->implementation,q_,ec);
+    return this->get_service().sync_deq(this->get_implementation(),q_,ec);
   }
 private:
   Queue*q_;

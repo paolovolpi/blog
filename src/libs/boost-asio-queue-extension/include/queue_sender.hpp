@@ -25,26 +25,26 @@ public:
   // async enq operation
   template <typename Handler>
   void async_enq(typename Queue::value_type val,Handler handler) {
-    this->service.async_enq(this->implementation,q_,val,handler);
+    this->get_service().async_enq(this->get_implementation(),q_,val,handler);
   }
   // async enq operation - timed
   template <typename Handler>
   void timed_async_enq(typename Queue::value_type val,Handler handler,std::size_t ms) {
-    this->service.timed_async_enq(this->implementation,q_,val,handler,ms);
+    this->get_service().timed_async_enq(this->get_implementation(),q_,val,handler,ms);
   }
   // wait until we can put a message in queue in async mode
   template <typename Handler>
   void async_wait_enq(Handler handler) {
-    this->service.async_wait_enq(this->implementation,q_,handler);
+    this->get_service().async_wait_enq(this->get_implementation(),q_,handler);
   }
   // wait until we can put a message in queue in async mode - timed
   template <typename Handler>
   void timed_async_wait_enq(Handler handler,std::size_t ms) {
-    this->service.timed_async_wait_enq(this->implementation,q_,handler,ms);
+    this->get_service().timed_async_wait_enq(this->get_implementation(),q_,handler,ms);
   }
   // sync enq operation (blocking)
   void sync_enq(typename Queue::value_type val,boost::system::error_code&ec){
-    this->service.sync_enq(this->implementation,q_,val,ec);
+    this->get_service().sync_enq(this->get_implementation(),q_,val,ec);
   }
 private:
   Queue*q_;
