@@ -45,7 +45,7 @@ T recvwait(int fdread,std::size_t ms,boost::system::error_code&ec,bool getMsg,ch
 
     // check for error
     if(n<0){
-      ec=boost::system::error_code(errno,boost::system::get_posix_category());
+      ec=boost::system::error_code(errno,boost::system::generic_category());
       return T{};
     }
     // check for tmo
@@ -71,7 +71,7 @@ T recvwait(int fdread,std::size_t ms,boost::system::error_code&ec,bool getMsg,ch
           if(errno==EWOULDBLOCK)break;
 
           // we have a real read error
-          ec=boost::system::error_code(errno,boost::system::get_posix_category());
+          ec=boost::system::error_code(errno,boost::system::generic_category());
           return T{};
         }
         // save character just read
@@ -123,7 +123,7 @@ bool sendwait(int fdwrite,T const*t,std::size_t ms,boost::system::error_code&ec,
 
     // check for error
     if(n<0){
-      ec=boost::system::error_code(errno,boost::system::get_posix_category());
+      ec=boost::system::error_code(errno,boost::system::generic_category());
       return false;
     }
     // check for tmo
@@ -149,7 +149,7 @@ bool sendwait(int fdwrite,T const*t,std::size_t ms,boost::system::error_code&ec,
           if(errno==EWOULDBLOCK)break;
 
           // we have a real write error
-          ec=boost::system::error_code(errno,boost::system::get_posix_category());
+          ec=boost::system::error_code(errno,boost::system::generic_category());
           return false;
         }
         // we wrote one byte

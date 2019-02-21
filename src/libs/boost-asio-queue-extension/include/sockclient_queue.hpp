@@ -287,7 +287,7 @@ private:
     // connect to server
     ec=boost::system::error_code();
     if(connect(clientsocket_,(const struct sockaddr*)&servaddr_,sizeof(servaddr_))<0) {
-      ec=boost::system::error_code(errno,boost::system::get_posix_category());
+      ec=boost::system::error_code(errno,boost::system::generic_category());
     }
     state_=CONNECTED;
   }

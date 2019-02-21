@@ -83,7 +83,7 @@ int waitForClientConnect(int servsocket,struct sockaddr_in&serveraddr,struct soc
 
   // error
   if(n<0){
-    ec=boost::system::error_code(errno,boost::system::get_posix_category());
+    ec=boost::system::error_code(errno,boost::system::generic_category());
     return ret;
   }
   // tmo
@@ -94,7 +94,7 @@ int waitForClientConnect(int servsocket,struct sockaddr_in&serveraddr,struct soc
   // client connected
   unsigned int addrlen;
   if((ret=::accept(servsocket,(struct sockaddr*)&clientaddr,&addrlen)) == -1){
-    ec=boost::system::error_code(errno,boost::system::get_posix_category());
+    ec=boost::system::error_code(errno,boost::system::generic_category());
     return ret;
   }
   // no errors - client is now connected, return client socket
