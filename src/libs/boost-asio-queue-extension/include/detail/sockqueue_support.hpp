@@ -1,5 +1,5 @@
 // Copyright (c) 2003-2015 Hans Ewetz (hansewetz at hotmail dot com)
-// Distributed under the Boost Software License, Version 1.0. 
+// Distributed under the Boost Software License, Version 1.0.
 
 #ifndef __FSOCK_QUEUE_SUPPPORT_H__
 #define __FSOCK_QUEUE_SUPPPORT_H__
@@ -51,7 +51,7 @@ int createListenSocket(int port,struct sockaddr_in&serveraddr,std::size_t maxcli
   serveraddr.sin_addr.s_addr=INADDR_ANY;
   serveraddr.sin_port=htons(port);
   memset(&(serveraddr.sin_zero),'\0',8);
-  if(bind(ret,(struct sockaddr*)&serveraddr,sizeof(serveraddr))==-1){
+  if(::bind(ret,(struct sockaddr*)&serveraddr,sizeof(serveraddr))==-1){
     throw std::runtime_error(std::string("createListenSocket: failed binding socket to address, errno: ")+boost::lexical_cast<std::string>(errno));
   }
   // start listening on socket
@@ -76,7 +76,7 @@ int waitForClientConnect(int servsocket,struct sockaddr_in&serveraddr,struct soc
   struct timeval tmo;
   tmo.tv_sec=ms/1000;
   tmo.tv_usec=(ms%1000)*1000;
-      
+
   // block on select - timeout if configured
   assert(maxfd!=-1);
   int n=::select(++maxfd,&input,NULL,NULL,ms>0?&tmo:NULL);
@@ -124,7 +124,7 @@ void acceptClientsAndDequeue(int servsocket,char sep,std::size_t tmoPollMs,std::
     struct timeval tmo;
     tmo.tv_sec=tmoPollMs/1000;
     tmo.tv_usec=(tmoPollMs%1000)*1000;
-    
+
     // block on select - timeout if configured
     assert(maxfd!=-1);
     int n=::select(++maxfd,&input,NULL,NULL,&tmo);
