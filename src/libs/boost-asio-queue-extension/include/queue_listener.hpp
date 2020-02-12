@@ -72,7 +72,7 @@ public:
 
   // mandatory (construct an implementation object)
   void construct(implementation_type&impl){
-      impl.reset(new Impl(this->get_io_service()));
+      impl.reset(new Impl(this->get_io_context()));
   }
   // mandatory (destroy an implementation object)
   void destroy(implementation_type&impl){
